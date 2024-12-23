@@ -13,10 +13,10 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginByEmailApiTest extends BaseApiTest {
 
     private static final String EMPTY_VALUE = "";
-    public static final String UNREGISTERED_EMAIL_ERROR_MESSAGE = "Проверьте email";
-    public static final String INVALID_PASSWORD_ERROR_MESSAGE = "Неправильный пароль";
-    public static final String INVALID_EMAIL_ERROR_MESSAGE = "Ошибка валидации поля email";
-    public static final String INVALID_PASSWORD_LENGTH_ERROR_MESSAGE = "Длина поля password должна быть от 6 до 32 символов";
+    private static final String UNREGISTERED_EMAIL_ERROR_MESSAGE = "Проверьте email";
+    private static final String INVALID_PASSWORD_ERROR_MESSAGE = "Неправильный пароль";
+    private static final String INVALID_EMAIL_ERROR_MESSAGE = "Ошибка валидации поля email";
+    private static final String INVALID_PASSWORD_LENGTH_ERROR_MESSAGE = "Длина поля password должна быть от 6 до 32 символов";
 
     @BeforeEach
     void setUp() {

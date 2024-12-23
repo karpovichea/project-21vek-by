@@ -12,10 +12,10 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
     private static final String EMPTY_VALUE = "";
-    public static final String UNREGISTERED_PHONE_ERROR_MESSAGE = "Пользователь не найден";
-    public static final String INVALID_PHONE_FORMAT_ERROR_MESSAGE = "Неправильный формат номера телефона";
-    public static final String INVALID_PHONE_CODE_ERROR_MESSAGE = "Телефон должен начинаться с: +375 (25,29,33,44) или +7 (9xx)";
-    public static final String EMPTY_PHONE_ERROR_MESSAGE = "Поле phone является обязательным полем";
+    private static final String UNREGISTERED_PHONE_ERROR_MESSAGE = "Пользователь не найден";
+    private static final String INVALID_PHONE_FORMAT_ERROR_MESSAGE = "Неправильный формат номера телефона";
+    private static final String INVALID_PHONE_CODE_ERROR_MESSAGE = "Телефон должен начинаться с: +375 (25,29,33,44) или +7 (9xx)";
+    private static final String EMPTY_PHONE_ERROR_MESSAGE = "Поле phone является обязательным полем";
 
     @BeforeEach
     void setUp() {
