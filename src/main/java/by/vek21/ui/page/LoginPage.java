@@ -45,7 +45,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public LoginPage waitForLoad() {
-        wait.until(ExpectedConditions.elementToBeClickable(continueByEmailButton));
+        wait.until(ExpectedConditions.visibilityOf(continueByEmailButton));
         return this;
     }
 
