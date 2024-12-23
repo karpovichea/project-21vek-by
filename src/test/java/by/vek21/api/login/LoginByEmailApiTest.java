@@ -40,7 +40,7 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
     @Test
     @DisplayName("Авторизация с неверным паролем")
-    public void testLoginWithIncorrectPassword() {
+    public void testLoginWithInvalidPassword() {
         String registeredEmail = "email@gmail.com";
         String invalidPassword = GenerateDataUtil.generatePassword();
 

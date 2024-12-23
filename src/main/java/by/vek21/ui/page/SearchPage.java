@@ -66,6 +66,7 @@ public class SearchPage extends BasePage {
     }
 
     public String getResultMessage() {
+        wait.until(ExpectedConditions.visibilityOf(resultBlock));
         return resultBlock.getText();
     }
 }

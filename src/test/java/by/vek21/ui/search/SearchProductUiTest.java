@@ -32,7 +32,7 @@ public class SearchProductUiTest extends BaseUiTest {
 
     @Test
     @DisplayName("Отсутсвие найденных товаров при невалидном запросе")
-    public void testDisplayResultsByDefault() {
+    public void testDisplayNoResults() {
         String invalidQuery = "~~~~~~~";
         searchPage
                 .waitForLoad()
