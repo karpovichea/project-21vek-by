@@ -83,8 +83,6 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, invalidBody);
 
-        response
-                .log().all()
-                .statusCode(415);
+        response.statusCode(415);
     }
 }
