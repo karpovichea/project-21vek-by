@@ -1,4 +1,4 @@
-package by.vek21.ui.model;
+package by.vek21.domain;
 
 public class User {
     private String email;

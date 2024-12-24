@@ -1,6 +1,6 @@
 package by.vek21.ui.util;
 
-import by.vek21.ui.model.Product;
+import by.vek21.domain.Product;
 
 import java.util.List;
 

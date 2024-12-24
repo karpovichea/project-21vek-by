@@ -1,7 +1,7 @@
 package by.vek21.ui.filter;
 
 import by.vek21.ui.BaseUiTest;
-import by.vek21.ui.model.Product;
+import by.vek21.domain.Product;
 import by.vek21.ui.page.ProductPage;
 import by.vek21.ui.page.FilterPage;
 import by.vek21.ui.step.OpenProductPageStep;
@@ -25,8 +25,10 @@ public class FilterByPriceUiTest extends BaseUiTest {
     }
 
     @Test
-    @DisplayName("Фильтр товаров по наименьшей цене")
+    @DisplayName("Фильтр товаров по заданной наименьшей цене")
     public void testFilterItemsByLowestPrice() {
+        logger.info("ЗАПУСК ТЕСТА: Фильтр товаров по заданной наименьшей цене");
+
         double minValue = 100.5;
         filterPage
                 .waitForLoad()
@@ -38,11 +40,15 @@ public class FilterByPriceUiTest extends BaseUiTest {
         List<Product> actualProducts = productPage.getAllProducts();
 
         Assertions.assertTrue(PriceUtil.isPricesInRange(actualProducts, minValue, Double.MAX_VALUE), "Есть товары с ценой ниже, чем " + minValue);
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Фильтр товаров по заданной наименьшей цене");
     }
 
     @Test
-    @DisplayName("Фильтр товаров по наибольшей цене")
+    @DisplayName("Фильтр товаров по заданной наибольшей цене")
     public void testFilterItemsByHighestPrice() {
+        logger.info("ЗАПУСК ТЕСТА: Фильтр товаров по заданной наибольшей цене");
+
         double maxValue = 1000;
 
         filterPage
@@ -55,11 +61,15 @@ public class FilterByPriceUiTest extends BaseUiTest {
         List<Product> actualProducts = productPage.getAllProducts();
 
         Assertions.assertTrue(PriceUtil.isPricesInRange(actualProducts, Double.MIN_VALUE, maxValue), "Есть товары с ценой выше, чем " + maxValue);
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Фильтр товаров по заданной наибольшей цене");
     }
 
     @Test
     @DisplayName("Фильтр товаров по заданному диапазону цен")
     public void testFilterItemsBetweenPrices() {
+        logger.info("ЗАПУСК ТЕСТА: Фильтр товаров по заданному диапазону цен");
+
         double minValue = 30;
         double maxValue = 100.55;
 
@@ -74,5 +84,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
         List<Product> actualProducts = productPage.getAllProducts();
 
         Assertions.assertTrue(PriceUtil.isPricesInRange(actualProducts, minValue, maxValue), "Есть товары выходящие за указанный диапазон цен");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Фильтр товаров по заданному диапазону цен");
     }
 }

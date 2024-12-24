@@ -1,7 +1,7 @@
 package by.vek21.ui.login;
 
 import by.vek21.ui.BaseUiTest;
-import by.vek21.ui.model.User;
+import by.vek21.domain.User;
 import by.vek21.ui.page.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
@@ -32,52 +32,70 @@ public class LoginByEmailUiTest extends BaseUiTest {
     @Test
     @DisplayName("Авторизация c незарегистрированной электронной почтой")
     public void testLoginWithUnregisteredEmail() {
-        final String unregisteredEmail = "unregistred@gmail.com";
-        final String password = GenerateDataUtil.generatePassword();
+        logger.info("ЗАПУСК ТЕСТА: Авторизация c незарегистрированной электронной почтой");
+
+        String unregisteredEmail = "unregistred@gmail.com";
+        String password = GenerateDataUtil.generatePassword();
 
         User user = new User(unregisteredEmail, password);
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(UNREGISTERED_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация c незарегистрированной электронной почтой");
     }
 
     @Test
     @DisplayName("Авторизация с неверным паролем")
     public void testLoginWithInvalidPassword() {
-        final String registeredEmail = "email@gmail.com";
-        final String invalidPassword = GenerateDataUtil.generatePassword();
+        logger.info("ЗАПУСК ТЕСТА: Авторизация с неверным паролем");
+
+        String registeredEmail = "email@gmail.com";
+        String invalidPassword = GenerateDataUtil.generatePassword();
 
         User user = new User(registeredEmail, invalidPassword);
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(INVALID_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с неверным паролем");
     }
 
     @Test
     @DisplayName("Авторизация с незаполненной электронной почтой")
     public void testLoginWithEmptyEmail() {
-        final String password = GenerateDataUtil.generatePassword();
+        logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненной электронной почтой");
+
+        String password = GenerateDataUtil.generatePassword();
 
         User user = new User(EMPTY_VALUE, password);
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненной электронной почтой");
     }
 
     @Test
     @DisplayName("Авторизация с незаполненным паролем")
     public void testLoginWithEmptyPassword() {
-        final String email = GenerateDataUtil.generateEmail();
+        logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненным паролем");
+
+        String email = GenerateDataUtil.generateEmail();
 
         User user = new User(email, EMPTY_VALUE);
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненным паролем");
     }
 
     @Test
     @DisplayName("Авторизация с незаполненными полями")
     public void testLoginWithEmptyData() {
+        logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненными полями");
+
         User user = new User(EMPTY_VALUE, EMPTY_VALUE);
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
@@ -85,13 +103,17 @@ public class LoginByEmailUiTest extends BaseUiTest {
                 () -> Assertions.assertEquals(EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки"),
                 () -> Assertions.assertEquals(EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки")
         );
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненными полями");
     }
 
     @Test
-    @DisplayName("Маскировка введенного пароля")
+    @DisplayName("Сокрытие введенного пароля")
     public void testMaskPassword() {
-        final String password = GenerateDataUtil.generatePassword();
-        final String fieldType = "password";
+        logger.info("ЗАПУСК ТЕСТА: Сокрытие введенного пароля");
+
+        String password = GenerateDataUtil.generatePassword();
+        String fieldType = "password";
 
         loginPage.fillPassword(password);
 
@@ -99,13 +121,17 @@ public class LoginByEmailUiTest extends BaseUiTest {
                 () -> Assertions.assertEquals(fieldType, loginPage.getPasswordFieldType(), "Неверный тип поля"),
                 () -> Assertions.assertEquals(password, loginPage.getPasswordFieldValue(), "Значение в поле отличается")
         );
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Сокрытие введенного пароля");
     }
 
     @Test
     @DisplayName("Отображение введенного пароля")
     public void testShowPassword() {
-        final String password = GenerateDataUtil.generatePassword();
-        final String fieldType = "text";
+        logger.info("ЗАПУСК ТЕСТА: Отображение введенного пароля");
+
+        String password = GenerateDataUtil.generatePassword();
+        String fieldType = "text";
 
         loginPage
                 .fillPassword(password)
@@ -115,5 +141,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
                 () -> Assertions.assertEquals(fieldType, loginPage.getPasswordFieldType(), "Неверный тип поля"),
                 () -> Assertions.assertEquals(password, loginPage.getPasswordFieldValue(), "Значение в поле отличается")
         );
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Отображение введенного пароля");
     }
 }

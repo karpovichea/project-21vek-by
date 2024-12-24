@@ -1,6 +1,6 @@
 package by.vek21.ui.step;
 
-import by.vek21.ui.model.Product;
+import by.vek21.domain.Product;
 import by.vek21.ui.page.CartPage;
 import by.vek21.ui.page.HomePage;
 import by.vek21.ui.page.ProductPage;

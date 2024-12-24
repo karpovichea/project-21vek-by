@@ -1,6 +1,6 @@
 package by.vek21.ui.step;
 
-import by.vek21.ui.model.User;
+import by.vek21.domain.User;
 import by.vek21.ui.page.LoginPage;
 import org.openqa.selenium.WebDriver;
 

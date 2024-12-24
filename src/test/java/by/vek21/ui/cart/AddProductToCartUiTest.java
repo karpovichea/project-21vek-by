@@ -1,7 +1,7 @@
 package by.vek21.ui.cart;
 
 import by.vek21.ui.BaseUiTest;
-import by.vek21.ui.model.Product;
+import by.vek21.domain.Product;
 import by.vek21.ui.page.CartPage;
 import by.vek21.ui.step.AddProductToCartStep;
 import by.vek21.ui.step.OpenProductPageStep;
@@ -25,6 +25,8 @@ public class AddProductToCartUiTest extends BaseUiTest {
     @Test
     @DisplayName("Добавление товара в корзину")
     public void testAddProductToCart() {
+        logger.info("ЗАПУСК ТЕСТА: Добавление товара в корзину");
+
         List<Product> expectedProducts = List.of(
                 new Product("Диван угловой Mio Tesoro Атланта 110 (Savana Chocolate/Ecostile Chocolate)", "1 235,00 р.")
         );
@@ -35,11 +37,15 @@ public class AddProductToCartUiTest extends BaseUiTest {
         List<Product> actualProducts = addProductToCartStep.getProductsFromCart();
 
         Assertions.assertEquals(expectedProducts, actualProducts, "Товар в корзине отличается");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Добавление товара в корзину");
     }
 
     @Test
     @DisplayName("Добавление нескольких товаров в корзину")
     public void testAddSeveralProductsToCart() {
+        logger.info("ЗАПУСК ТЕСТА: Добавление нескольких товаров в корзину");
+
         List<Product> expectedProducts = List.of(
                 new Product("Диван угловой Mio Tesoro Атланта 110 (Savana Chocolate/Ecostile Chocolate)", "1 235,00 р."),
                 new Product("Диван Mio Tesoro Такка SB2 (Malmo 90 Grey)", "350,00 р.")
@@ -57,5 +63,7 @@ public class AddProductToCartUiTest extends BaseUiTest {
                 () -> Assertions.assertTrue(actualProducts.containsAll(expectedProducts), "Товары в корзине отличаются"),
                 () -> Assertions.assertEquals(expectedSum, actualSum, "Итоговая сумма не совпадает")
         );
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Добавление нескольких товаров в корзину");
     }
 }

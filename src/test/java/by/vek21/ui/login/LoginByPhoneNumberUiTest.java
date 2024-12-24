@@ -1,7 +1,7 @@
 package by.vek21.ui.login;
 
 import by.vek21.ui.BaseUiTest;
-import by.vek21.ui.model.User;
+import by.vek21.domain.User;
 import by.vek21.ui.page.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
@@ -29,22 +29,30 @@ public class LoginByPhoneNumberUiTest extends BaseUiTest {
     @Test
     @DisplayName("Авторизация с незарегистрированным номером телефона")
     public void testLoginWithUnregisteredPhoneNumber() {
-        final String unregisteredPhoneNumber = "291111111";
+        logger.info("ЗАПУСК ТЕСТА: Авторизация с незарегистрированным номером телефона");
+
+        String unregisteredPhoneNumber = "291111111";
         User user = new User(unregisteredPhoneNumber);
 
         loginStep.fillLoginFormByPhoneNumberAndSubmit(user);
 
         Assertions.assertEquals(UNREGISTERED_PHONE_NUMBER_ERROR_MESSAGE, loginPage.getPhoneNumberErrorMessage(), "Некорректный текст ошибки");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незарегистрированным номером телефона");
     }
 
     @Test
     @DisplayName("Авторизация с невалидным кодом оператора")
     public void testLoginWithInvalidCodeNumber() {
-        final String invalidCodeNumber = "551111111";
+        logger.info("ЗАПУСК ТЕСТА: Авторизация с невалидным кодом оператора");
+
+        String invalidCodeNumber = "551111111";
         User user = new User(invalidCodeNumber);
 
         loginStep.fillLoginFormByPhoneNumberAndSubmit(user);
 
         Assertions.assertEquals(INVALID_CODE_NUMBER_ERROR_MESSAGE, loginPage.getPhoneNumberErrorMessage(), "Некорректный текст ошибки");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с невалидным кодом оператора");
     }
 }

@@ -22,28 +22,38 @@ public class SearchProductUiTest extends BaseUiTest {
     @Test
     @DisplayName("Поиск товаров по валидному запросу")
     public void testSearchItems() {
+        logger.info("ЗАПУСК ТЕСТА: Поиск товаров по валидному запросу");
+
         String validQuery = "телевизор";
         searchPage
                 .waitForLoad()
                 .enterSearchQuery(validQuery);
 
         Assertions.assertTrue(searchPage.isResultsContainKeyword(validQuery), "Найденные товары не соответствуют запросу");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Поиск товаров по валидному запросу");
     }
 
     @Test
     @DisplayName("Отсутсвие найденных товаров при невалидном запросе")
     public void testDisplayNoResults() {
+        logger.info("ЗАПУСК ТЕСТА: Отсутсвие найденных товаров при невалидном запросе");
+
         String invalidQuery = "~~~~~~~";
         searchPage
                 .waitForLoad()
                 .enterSearchQuery(invalidQuery);
 
         Assertions.assertEquals(NO_RESULT_MESSAGE, searchPage.getResultMessage(), "Некорректный текст сообщения");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Отсутсвие найденных товаров при невалидном запросе");
     }
 
     @Test
     @DisplayName("Отображение результатов последних запросов")
     public void testDisplayRecentQueries() {
+        logger.info("ЗАПУСК ТЕСТА: Отображение результатов последних запросов");
+
         String firstQuery = "утюг";
         String secondQuery = "смартфон";
 
@@ -57,5 +67,7 @@ public class SearchProductUiTest extends BaseUiTest {
         List<String> expectedRecentQueries = List.of(firstQuery, secondQuery);
 
         Assertions.assertTrue(searchPage.isResultsContainRecentQueries(expectedRecentQueries), "Некорректные результаты последних запросов");
+
+        logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Отображение результатов последних запросов");
     }
 }

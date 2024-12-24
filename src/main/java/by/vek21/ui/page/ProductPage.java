@@ -1,6 +1,6 @@
 package by.vek21.ui.page;
 
-import by.vek21.ui.model.Product;
+import by.vek21.domain.Product;
 import by.vek21.ui.util.UserActionUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

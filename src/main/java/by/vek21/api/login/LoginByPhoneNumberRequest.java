@@ -1,6 +1,6 @@
 package by.vek21.api.login;
 
-import by.vek21.ui.model.User;
+import by.vek21.domain.User;
 import com.google.gson.Gson;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
