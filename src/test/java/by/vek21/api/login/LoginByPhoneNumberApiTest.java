@@ -28,7 +28,6 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незарегистрированным номером телефона");
 
         String unregisteredPhone = "+375 (29) 1111111";
-
         User user = new User(unregisteredPhone);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
@@ -46,7 +45,6 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с недопустимым кодом номера телефона");
 
         String unregisteredPhone = "+375 (55) 1111111";
-
         User user = new User(unregisteredPhone);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
@@ -64,7 +62,6 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с недопустимым форматом номера телефона");
 
         String unregisteredPhone = "+375291111111";
-
         User user = new User(unregisteredPhone);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
@@ -82,7 +79,6 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненным номером телефона");
 
         User user = new User(EMPTY_VALUE);
-
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
 
         response

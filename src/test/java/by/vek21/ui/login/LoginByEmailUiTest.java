@@ -36,8 +36,8 @@ public class LoginByEmailUiTest extends BaseUiTest {
 
         String unregisteredEmail = "unregistred@gmail.com";
         String password = GenerateDataUtil.generatePassword();
-
         User user = new User(unregisteredEmail, password);
+
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(UNREGISTERED_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
@@ -52,8 +52,8 @@ public class LoginByEmailUiTest extends BaseUiTest {
 
         String registeredEmail = "email@gmail.com";
         String invalidPassword = GenerateDataUtil.generatePassword();
-
         User user = new User(registeredEmail, invalidPassword);
+
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(INVALID_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
@@ -67,8 +67,8 @@ public class LoginByEmailUiTest extends BaseUiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненной электронной почтой");
 
         String password = GenerateDataUtil.generatePassword();
-
         User user = new User(EMPTY_VALUE, password);
+
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
@@ -82,8 +82,8 @@ public class LoginByEmailUiTest extends BaseUiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненным паролем");
 
         String email = GenerateDataUtil.generateEmail();
-
         User user = new User(email, EMPTY_VALUE);
+
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertEquals(EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
@@ -97,6 +97,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненными полями");
 
         User user = new User(EMPTY_VALUE, EMPTY_VALUE);
+
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertAll(

@@ -25,6 +25,7 @@ public class SearchProductUiTest extends BaseUiTest {
         logger.info("ЗАПУСК ТЕСТА: Поиск товаров по валидному запросу");
 
         String validQuery = "телевизор";
+
         searchPage
                 .waitForLoad()
                 .enterSearchQuery(validQuery);
@@ -40,6 +41,7 @@ public class SearchProductUiTest extends BaseUiTest {
         logger.info("ЗАПУСК ТЕСТА: Отсутсвие найденных товаров при невалидном запросе");
 
         String invalidQuery = "~~~~~~~";
+
         searchPage
                 .waitForLoad()
                 .enterSearchQuery(invalidQuery);

@@ -30,7 +30,6 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         String unregisteredEmail = "unregistred@gmail.com";
         String password = GenerateDataUtil.generatePassword();
-
         User user = new User(unregisteredEmail, password);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
@@ -49,7 +48,6 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         String registeredEmail = "email@gmail.com";
         String invalidPassword = GenerateDataUtil.generatePassword();
-
         User user = new User(registeredEmail, invalidPassword);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
@@ -82,7 +80,6 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         String invalidEmailFormat = "email.gmail.com";
         String password = GenerateDataUtil.generatePassword();
-
         User user = new User(invalidEmailFormat, password);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
@@ -101,7 +98,6 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         String registeredEmail = "email@gmail.com";
         String invalidPasswordLength = "!!!12";
-
         User user = new User(registeredEmail, invalidPasswordLength);
 
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
