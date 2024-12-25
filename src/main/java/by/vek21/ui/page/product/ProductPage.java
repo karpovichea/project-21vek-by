@@ -2,7 +2,7 @@ package by.vek21.ui.page.product;
 
 import by.vek21.domain.Product;
 import by.vek21.ui.page.BasePage;
-import by.vek21.ui.util.UserActionUtil;
+import by.vek21.ui.util.ActionUtil;
 import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -52,7 +52,7 @@ public class ProductPage extends BasePage {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Продукт с именем '" + productName + "' не найден."));
 
-        UserActionUtil.scrollToElement(driver, productElement);
+        ActionUtil.scrollToElement(driver, productElement);
         return productElement;
     }
 

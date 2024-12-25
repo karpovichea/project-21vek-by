@@ -1,20 +1,18 @@
-package by.vek21.ui.login;
+package by.vek21.ui;
 
-import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.User;
 import by.vek21.ui.page.login.LoginPageMessages;
 import by.vek21.ui.page.login.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
-import by.vek21.ui.util.GenerateDataUtil;
+import by.vek21.util.GenerateDataUtil;
+import by.vek21.util.GenerateUsers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LoginByEmailUiTest extends BaseUiTest {
-
-    private static final String EMPTY_VALUE = "";
 
     private LoginPage loginPage;
     private LoginStep loginStep;
@@ -31,9 +29,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testLoginWithUnregisteredEmail() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация c незарегистрированной электронной почтой");
 
-        String unregisteredEmail = "unregistred@gmail.com";
-        String password = GenerateDataUtil.generatePassword();
-        User user = new User(unregisteredEmail, password);
+        User user = GenerateUsers.getUserWithUnregisteredEmailAndAnyPassword();
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
@@ -47,9 +43,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testLoginWithInvalidPassword() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с неверным паролем");
 
-        String registeredEmail = "email@gmail.com";
-        String invalidPassword = GenerateDataUtil.generatePassword();
-        User user = new User(registeredEmail, invalidPassword);
+        User user = GenerateUsers.getUserWithRegisteredEmailAndInvalidPassword();
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
@@ -63,8 +57,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testLoginWithEmptyEmail() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненной электронной почтой");
 
-        String password = GenerateDataUtil.generatePassword();
-        User user = new User(EMPTY_VALUE, password);
+        User user = GenerateUsers.getUserWithEmptyEmailAndAnyPassword();
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
@@ -78,8 +71,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testLoginWithEmptyPassword() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненным паролем");
 
-        String email = GenerateDataUtil.generateEmail();
-        User user = new User(email, EMPTY_VALUE);
+        User user = GenerateUsers.getUserWithAnyEmailAndEmptyPassword();
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
@@ -93,7 +85,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testLoginWithEmptyData() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненными полями");
 
-        User user = new User(EMPTY_VALUE, EMPTY_VALUE);
+        User user = GenerateUsers.getUserWithEmptyEmailAndPassword();
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
@@ -110,14 +102,14 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testMaskPassword() {
         logger.info("ЗАПУСК ТЕСТА: Сокрытие введенного пароля");
 
-        String password = GenerateDataUtil.generatePassword();
+        String anyPassword = GenerateDataUtil.generatePassword();
         String fieldType = "password";
 
-        loginPage.fillPassword(password);
+        loginPage.fillPassword(anyPassword);
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(fieldType, loginPage.getPasswordFieldType(), "Неверный тип поля"),
-                () -> Assertions.assertEquals(password, loginPage.getPasswordFieldValue(), "Значение в поле отличается")
+                () -> Assertions.assertEquals(anyPassword, loginPage.getPasswordFieldValue(), "Значение в поле отличается")
         );
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Сокрытие введенного пароля");
@@ -128,16 +120,16 @@ public class LoginByEmailUiTest extends BaseUiTest {
     public void testShowPassword() {
         logger.info("ЗАПУСК ТЕСТА: Отображение введенного пароля");
 
-        String password = GenerateDataUtil.generatePassword();
+        String anyPassword = GenerateDataUtil.generatePassword();
         String fieldType = "text";
 
         loginPage
-                .fillPassword(password)
+                .fillPassword(anyPassword)
                 .clickShowPasswordIcon();
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(fieldType, loginPage.getPasswordFieldType(), "Неверный тип поля"),
-                () -> Assertions.assertEquals(password, loginPage.getPasswordFieldValue(), "Значение в поле отличается")
+                () -> Assertions.assertEquals(anyPassword, loginPage.getPasswordFieldValue(), "Значение в поле отличается")
         );
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Отображение введенного пароля");

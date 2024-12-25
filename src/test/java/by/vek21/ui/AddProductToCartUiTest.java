@@ -1,6 +1,5 @@
-package by.vek21.ui.cart;
+package by.vek21.ui;
 
-import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.Product;
 import by.vek21.ui.page.cart.CartPage;
 import by.vek21.ui.step.AddProductToCartStep;

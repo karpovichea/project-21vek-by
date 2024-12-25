@@ -1,7 +1,7 @@
 package by.vek21.ui;
 
 import by.vek21.ui.driver.Driver;
-import by.vek21.ui.util.UserActionUtil;
+import by.vek21.ui.util.ActionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -27,7 +27,7 @@ public class BaseUiTest {
 
     @AfterEach
     public void tearDown() {
-        UserActionUtil.simulateUserDelay();
+        ActionUtil.simulateUserDelay();
         Driver.quit();
     }
 }

@@ -1,7 +1,7 @@
 package by.vek21.ui.page.home;
 
 import by.vek21.ui.page.BasePage;
-import by.vek21.ui.util.UserActionUtil;
+import by.vek21.ui.util.ActionUtil;
 import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +33,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickCartButton() {
-        UserActionUtil.simulateUserDelay();
+        ActionUtil.simulateUserDelay();
         cartButton.click();
     }
 

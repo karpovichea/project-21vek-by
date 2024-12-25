@@ -1,4 +1,4 @@
-package by.vek21.api.login;
+package by.vek21.api.login.response;
 
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;

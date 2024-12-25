@@ -1,11 +1,11 @@
-package by.vek21.ui.login;
+package by.vek21.ui;
 
-import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.User;
 import by.vek21.ui.page.login.LoginPageMessages;
 import by.vek21.ui.page.login.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
+import by.vek21.util.GenerateUsers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,8 +28,7 @@ public class LoginByPhoneNumberUiTest extends BaseUiTest {
     public void testLoginWithUnregisteredPhoneNumber() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незарегистрированным номером телефона");
 
-        String unregisteredPhoneNumber = "291111111";
-        User user = new User(unregisteredPhoneNumber);
+        User user = GenerateUsers.getUserWithUnregisteredPhoneUi();
 
         loginStep.fillLoginFormByPhoneNumberAndSubmit(user);
 
@@ -43,8 +42,7 @@ public class LoginByPhoneNumberUiTest extends BaseUiTest {
     public void testLoginWithInvalidCodeNumber() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с невалидным кодом оператора");
 
-        String invalidCodeNumber = "551111111";
-        User user = new User(invalidCodeNumber);
+        User user = GenerateUsers.getUserWithInvalidPhoneCodeUi();
 
         loginStep.fillLoginFormByPhoneNumberAndSubmit(user);
 

@@ -1,7 +1,10 @@
-package by.vek21.api.login;
+package by.vek21.api;
 
-import by.vek21.api.BaseApiTest;
+import by.vek21.api.login.request.LoginByPhoneNumberRequest;
+import by.vek21.api.login.response.LoginResponse;
+import by.vek21.api.login.response.LoginResponseMessages;
 import by.vek21.domain.User;
+import by.vek21.util.GenerateUsers;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,12 +13,6 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 
 public class LoginByPhoneNumberApiTest extends BaseApiTest {
-
-    private static final String EMPTY_VALUE = "";
-    private static final String UNREGISTERED_PHONE_ERROR_MESSAGE = "Пользователь не найден";
-    private static final String INVALID_PHONE_FORMAT_ERROR_MESSAGE = "Неправильный формат номера телефона";
-    private static final String INVALID_PHONE_CODE_ERROR_MESSAGE = "Телефон должен начинаться с: +375 (25,29,33,44) или +7 (9xx)";
-    private static final String EMPTY_PHONE_ERROR_MESSAGE = "Поле phone является обязательным полем";
 
     @BeforeEach
     void setUp() {
@@ -27,14 +24,12 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
     public void testLoginWithUnregisteredPhone() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незарегистрированным номером телефона");
 
-        String unregisteredPhone = "+375 (29) 1111111";
-        User user = new User(unregisteredPhone);
-
+        User user = GenerateUsers.getUserWithUnregisteredPhoneApi();
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
 
         response
                 .statusCode(404)
-                .body("errors[0].detail", equalTo(LoginMessages.UNREGISTERED_PHONE_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginResponseMessages.UNREGISTERED_PHONE_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незарегистрированным номером телефона");
     }
@@ -44,14 +39,12 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
     public void testLoginWithInvalidPhoneCode() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с недопустимым кодом номера телефона");
 
-        String unregisteredPhone = "+375 (55) 1111111";
-        User user = new User(unregisteredPhone);
-
+        User user = GenerateUsers.getUserWithInvalidPhoneCodeApi();
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
 
         response
                 .statusCode(422)
-                .body("errors[0].detail", equalTo(LoginMessages.INVALID_PHONE_CODE_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginResponseMessages.INVALID_PHONE_CODE_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с недопустимым кодом номера телефона");
     }
@@ -61,14 +54,12 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
     public void testLoginWithInvalidPhone() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с недопустимым форматом номера телефона");
 
-        String unregisteredPhone = "+375291111111";
-        User user = new User(unregisteredPhone);
-
+        User user = GenerateUsers.getUserWithInvalidPhoneFormatApi();
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
 
         response
                 .statusCode(422)
-                .body("errors[0].detail", equalTo(LoginMessages.INVALID_PHONE_FORMAT_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginResponseMessages.INVALID_PHONE_FORMAT_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с недопустимым форматом номера телефона");
     }
@@ -78,12 +69,12 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
     public void testLoginWithEmptyPhone() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненным номером телефона");
 
-        User user = new User(EMPTY_VALUE);
+        User user = GenerateUsers.getUserWithEmptyPhone();
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, LoginByPhoneNumberRequest.getBody(user));
 
         response
                 .statusCode(422)
-                .body("errors[0].detail", equalTo(LoginMessages.EMPTY_PHONE_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginResponseMessages.EMPTY_PHONE_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненным номером телефона");
     }
@@ -94,7 +85,6 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с невалидным телом запроса");
 
         String invalidBody = "{";
-
         ValidatableResponse response = LoginResponse.getResponse(LoginByPhoneNumberRequest.requestSpecification, invalidBody);
 
         response.statusCode(415);

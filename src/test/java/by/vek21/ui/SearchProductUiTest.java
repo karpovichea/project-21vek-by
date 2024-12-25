@@ -1,6 +1,5 @@
-package by.vek21.ui.search;
+package by.vek21.ui;
 
-import by.vek21.ui.BaseUiTest;
 import by.vek21.ui.page.search.SearchPageMessages;
 import by.vek21.ui.page.search.SearchPage;
 import org.junit.jupiter.api.Assertions;

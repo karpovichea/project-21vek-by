@@ -1,8 +1,10 @@
-package by.vek21.api.login;
+package by.vek21.api;
 
-import by.vek21.api.BaseApiTest;
+import by.vek21.api.login.request.LoginByEmailRequest;
+import by.vek21.api.login.response.LoginResponse;
+import by.vek21.api.login.response.LoginResponseMessages;
 import by.vek21.domain.User;
-import by.vek21.ui.util.GenerateDataUtil;
+import by.vek21.util.GenerateUsers;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 
 public class LoginByEmailApiTest extends BaseApiTest {
-
-    private static final String EMPTY_VALUE = "";
 
     @BeforeEach
     void setUp() {
@@ -24,15 +24,12 @@ public class LoginByEmailApiTest extends BaseApiTest {
     public void testLoginWithUnregisteredEmail() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация c незарегистрированной электронной почтой");
 
-        String unregisteredEmail = "unregistred@gmail.com";
-        String password = GenerateDataUtil.generatePassword();
-        User user = new User(unregisteredEmail, password);
-
+        User user = GenerateUsers.getUserWithUnregisteredEmailAndAnyPassword();
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
 
         response
                 .statusCode(200)
-                .body("error", equalTo(LoginMessages.UNREGISTERED_EMAIL_ERROR_MESSAGE));
+                .body("error", equalTo(LoginResponseMessages.UNREGISTERED_EMAIL_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация c незарегистрированной электронной почтой");
     }
@@ -42,15 +39,12 @@ public class LoginByEmailApiTest extends BaseApiTest {
     public void testLoginWithInvalidPassword() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с неверным паролем");
 
-        String registeredEmail = "email@gmail.com";
-        String invalidPassword = GenerateDataUtil.generatePassword();
-        User user = new User(registeredEmail, invalidPassword);
-
+        User user = GenerateUsers.getUserWithRegisteredEmailAndInvalidPassword();
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
 
         response
                 .statusCode(200)
-                .body("error", equalTo(LoginMessages.INVALID_PASSWORD_ERROR_MESSAGE));
+                .body("error", equalTo(LoginResponseMessages.INVALID_PASSWORD_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с неверным паролем");
     }
@@ -60,8 +54,7 @@ public class LoginByEmailApiTest extends BaseApiTest {
     public void testLoginWithEmptyEmailAndPassword() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с незаполненными полями");
 
-        User user = new User(EMPTY_VALUE, EMPTY_VALUE);
-
+        User user = GenerateUsers.getUserWithEmptyEmailAndPassword();
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
 
         response.statusCode(404);
@@ -74,33 +67,27 @@ public class LoginByEmailApiTest extends BaseApiTest {
     public void testLoginWithInvalidEmailFormat() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с недопустимым форматом электронной почты");
 
-        String invalidEmailFormat = "email.gmail.com";
-        String password = GenerateDataUtil.generatePassword();
-        User user = new User(invalidEmailFormat, password);
-
+        User user = GenerateUsers.getUserWithInValidEmailFormatAndAnyPassword();
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
 
         response
                 .statusCode(200)
-                .body("error", equalTo(LoginMessages.INVALID_EMAIL_ERROR_MESSAGE));
+                .body("error", equalTo(LoginResponseMessages.INVALID_EMAIL_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с недопустимым форматом электронной почты");
     }
 
     @Test
     @DisplayName("Авторизация с паролем недопустимой длины")
-    public void testLoginWithInvalidPasswordFormat() {
+    public void testLoginWithInvalidPasswordLength() {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с паролем недопустимой длины");
 
-        String registeredEmail = "email@gmail.com";
-        String invalidPasswordLength = "!!!12";
-        User user = new User(registeredEmail, invalidPasswordLength);
-
+        User user = GenerateUsers.getUserWithRegisteredEmailAndInvalidPasswordLength();
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, LoginByEmailRequest.getBody(user));
 
         response
                 .statusCode(200)
-                .body("error", equalTo(LoginMessages.INVALID_PASSWORD_LENGTH_ERROR_MESSAGE));
+                .body("error", equalTo(LoginResponseMessages.INVALID_PASSWORD_LENGTH_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с паролем недопустимой длины");
     }
@@ -111,7 +98,6 @@ public class LoginByEmailApiTest extends BaseApiTest {
         logger.info("ЗАПУСК ТЕСТА: Авторизация с невалидным телом запроса");
 
         String invalidBody = "{";
-
         ValidatableResponse response = LoginResponse.getResponse(LoginByEmailRequest.requestSpecification, invalidBody);
 
         response.statusCode(404);

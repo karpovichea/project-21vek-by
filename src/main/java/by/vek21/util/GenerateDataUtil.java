@@ -1,4 +1,4 @@
-package by.vek21.ui.util;
+package by.vek21.util;
 
 import com.github.javafaker.Faker;
 

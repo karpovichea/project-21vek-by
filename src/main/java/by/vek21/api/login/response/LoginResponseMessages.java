@@ -1,6 +1,6 @@
-package by.vek21.api.login;
+package by.vek21.api.login.response;
 
-public class LoginMessages {
+public class LoginResponseMessages {
 
     public static final String UNREGISTERED_EMAIL_ERROR_MESSAGE = "Проверьте email";
     public static final String INVALID_PASSWORD_ERROR_MESSAGE = "Неправильный пароль";
