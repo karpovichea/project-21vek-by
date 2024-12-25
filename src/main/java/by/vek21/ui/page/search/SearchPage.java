@@ -43,7 +43,6 @@ public class SearchPage extends BasePage {
     public SearchPage enterSearchQuery(String query) {
         searchField.sendKeys(query);
         searchField.click();
-        clickSearchField();
         Wait.waitForVisibility(suggestResults);
         searchField.sendKeys(Keys.ENTER);
         return this;
