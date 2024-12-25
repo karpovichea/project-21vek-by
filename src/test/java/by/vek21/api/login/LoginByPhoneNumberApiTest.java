@@ -34,7 +34,7 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
         response
                 .statusCode(404)
-                .body("errors[0].detail", equalTo(UNREGISTERED_PHONE_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginMessages.UNREGISTERED_PHONE_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незарегистрированным номером телефона");
     }
@@ -51,7 +51,7 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
         response
                 .statusCode(422)
-                .body("errors[0].detail", equalTo(INVALID_PHONE_CODE_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginMessages.INVALID_PHONE_CODE_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с недопустимым кодом номера телефона");
     }
@@ -68,7 +68,7 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
         response
                 .statusCode(422)
-                .body("errors[0].detail", equalTo(INVALID_PHONE_FORMAT_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginMessages.INVALID_PHONE_FORMAT_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с недопустимым форматом номера телефона");
     }
@@ -83,7 +83,7 @@ public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
         response
                 .statusCode(422)
-                .body("errors[0].detail", equalTo(EMPTY_PHONE_ERROR_MESSAGE));
+                .body("errors[0].detail", equalTo(LoginMessages.EMPTY_PHONE_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненным номером телефона");
     }

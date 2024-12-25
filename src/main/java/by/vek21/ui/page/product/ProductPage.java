@@ -1,12 +1,12 @@
-package by.vek21.ui.page;
+package by.vek21.ui.page.product;
 
 import by.vek21.domain.Product;
+import by.vek21.ui.page.BasePage;
 import by.vek21.ui.util.UserActionUtil;
+import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,18 +20,18 @@ public class ProductPage extends BasePage {
     @FindBy(className = "ListingProductV2_product__kGFbz")
     private List<WebElement> productCards;
 
-    public ProductPage(WebDriver driver) {
-        super(driver);
+    public ProductPage() {
+        super();
     }
 
     @Override
     public ProductPage waitForLoad() {
-        wait.until(driver -> !productCards.isEmpty());
+        Wait.waitForNonEmptyList(productCards);
         return this;
     }
 
     public void waitForLoadAfterFilter() {
-        wait.until(ExpectedConditions.stalenessOf(productCards.getLast()));
+        Wait.waitForStalenessOfLastElement(productCards);
     }
 
     public List<Product> getAllProducts() {

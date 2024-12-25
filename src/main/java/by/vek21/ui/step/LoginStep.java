@@ -1,15 +1,14 @@
 package by.vek21.ui.step;
 
 import by.vek21.domain.User;
-import by.vek21.ui.page.LoginPage;
-import org.openqa.selenium.WebDriver;
+import by.vek21.ui.page.login.LoginPage;
 
 public class LoginStep {
 
     private final LoginPage loginPage;
 
-    public LoginStep(WebDriver driver) {
-        loginPage = new LoginPage(driver);
+    public LoginStep() {
+        loginPage = new LoginPage();
     }
 
     public void fillLoginFormByEmailAndSubmit(User user) {

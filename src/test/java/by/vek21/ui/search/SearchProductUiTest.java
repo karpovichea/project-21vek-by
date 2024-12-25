@@ -1,7 +1,8 @@
 package by.vek21.ui.search;
 
 import by.vek21.ui.BaseUiTest;
-import by.vek21.ui.page.SearchPage;
+import by.vek21.ui.page.search.SearchPageMessages;
+import by.vek21.ui.page.search.SearchPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,12 +12,11 @@ import java.util.List;
 
 public class SearchProductUiTest extends BaseUiTest {
 
-    private static final String NO_RESULT_MESSAGE = "По данным параметрам товаров не найдено";
     private SearchPage searchPage;
 
     @BeforeEach
     public void setUpSearchTest() {
-        searchPage = new SearchPage(driver);
+        searchPage = new SearchPage();
     }
 
     @Test
@@ -46,7 +46,7 @@ public class SearchProductUiTest extends BaseUiTest {
                 .waitForLoad()
                 .enterSearchQuery(invalidQuery);
 
-        Assertions.assertEquals(NO_RESULT_MESSAGE, searchPage.getResultMessage(), "Некорректный текст сообщения");
+        Assertions.assertEquals(SearchPageMessages.NO_RESULT_MESSAGE, searchPage.getResultMessage(), "Некорректный текст сообщения");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Отсутсвие найденных товаров при невалидном запросе");
     }
@@ -64,7 +64,7 @@ public class SearchProductUiTest extends BaseUiTest {
                 .enterSearchQuery(firstQuery)
                 .clearSearch()
                 .enterSearchQuery(secondQuery)
-                .clearSearch();
+                .clickSearchField();
 
         List<String> expectedRecentQueries = List.of(firstQuery, secondQuery);
 

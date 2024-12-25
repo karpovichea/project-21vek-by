@@ -1,10 +1,11 @@
-package by.vek21.ui.page;
+package by.vek21.ui.page.search;
 
+import by.vek21.ui.page.BasePage;
+import by.vek21.ui.util.ElementUtil;
+import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,24 +21,30 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class, 'result__name')]")
     private List<WebElement> searchResults;
 
+    @FindBy(id = "j-suggest_items")
+    private WebElement suggestResults;
+
     @FindBy(xpath = "//div[contains(@class, 'SearchSuggestList_searchHistory')]")
     private List<WebElement> recentQueries;
 
     @FindBy(id = "j-paginator")
-    private WebElement resultBlock;
+    private WebElement resultMessage;
 
-    public SearchPage(WebDriver driver) {
-        super(driver);
+    public SearchPage() {
+        super();
     }
 
     @Override
     public SearchPage waitForLoad() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchField));
+        Wait.waitForClickable(searchField);
         return this;
     }
 
     public SearchPage enterSearchQuery(String query) {
         searchField.sendKeys(query);
+        searchField.click();
+        clickSearchField();
+        Wait.waitForVisibility(suggestResults);
         searchField.sendKeys(Keys.ENTER);
         return this;
     }
@@ -47,17 +54,21 @@ public class SearchPage extends BasePage {
         return this;
     }
 
+    public void clickSearchField() {
+        searchField.click();
+    }
+
     public List<String> getSearchResults() {
-        return getTextsFromElements(searchResults);
+        return ElementUtil.getTextsFromElements(searchResults);
     }
 
     public List<String> getRecentQueries() {
-        return getTextsFromElements(recentQueries);
+        return ElementUtil.getTextsFromElements(recentQueries);
     }
 
     public boolean isResultsContainKeyword(String query) {
         List<String> results = getSearchResults();
-        return isListContainText(results, query);
+        return ElementUtil.isListContainText(results, query);
     }
 
     public boolean isResultsContainRecentQueries(List<String> queries) {
@@ -66,7 +77,7 @@ public class SearchPage extends BasePage {
     }
 
     public String getResultMessage() {
-        wait.until(ExpectedConditions.visibilityOf(resultBlock));
-        return resultBlock.getText();
+        Wait.waitForVisibility(resultMessage);
+        return resultMessage.getText();
     }
 }

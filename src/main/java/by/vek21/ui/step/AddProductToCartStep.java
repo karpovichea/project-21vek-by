@@ -1,10 +1,9 @@
 package by.vek21.ui.step;
 
 import by.vek21.domain.Product;
-import by.vek21.ui.page.CartPage;
-import by.vek21.ui.page.HomePage;
-import by.vek21.ui.page.ProductPage;
-import org.openqa.selenium.WebDriver;
+import by.vek21.ui.page.cart.CartPage;
+import by.vek21.ui.page.home.HomePage;
+import by.vek21.ui.page.product.ProductPage;
 
 import java.util.List;
 
@@ -14,10 +13,10 @@ public class AddProductToCartStep {
     private final HomePage homePage;
     private final CartPage cartPage;
 
-    public AddProductToCartStep(WebDriver driver) {
-        productPage = new ProductPage(driver);
-        homePage = new HomePage(driver);
-        cartPage = new CartPage(driver);
+    public AddProductToCartStep() {
+        productPage = new ProductPage();
+        homePage = new HomePage();
+        cartPage = new CartPage();
     }
 
     public void addProductsToCart(List<Product> products) {

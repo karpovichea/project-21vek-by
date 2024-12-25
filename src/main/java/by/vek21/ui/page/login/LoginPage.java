@@ -1,9 +1,9 @@
-package by.vek21.ui.page;
+package by.vek21.ui.page.login;
 
-import org.openqa.selenium.WebDriver;
+import by.vek21.ui.page.BasePage;
+import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -39,13 +39,13 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[contains(@class, 'Button-module__button Button-module__blue-primary')]")
     private WebElement continueByPhoneNumberButton;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
+    public LoginPage() {
+        super();
     }
 
     @Override
     public LoginPage waitForLoad() {
-        wait.until(ExpectedConditions.visibilityOf(continueByEmailButton));
+        Wait.waitForVisibility(continueByEmailButton);
         return this;
     }
 
@@ -57,7 +57,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getPhoneNumberErrorMessage() {
-        wait.until(ExpectedConditions.visibilityOf(passwordErrorMessage));
+        Wait.waitForVisibility(phoneNumberErrorMessage);
         return phoneNumberErrorMessage.getText();
     }
 
@@ -67,7 +67,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getEmailErrorMessage() {
-        wait.until(ExpectedConditions.visibilityOf(passwordErrorMessage));
+        Wait.waitForVisibility(emailErrorMessage);
         return emailErrorMessage.getText();
     }
 
@@ -77,7 +77,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getPasswordErrorMessage() {
-        wait.until(ExpectedConditions.visibilityOf(passwordErrorMessage));
+        Wait.waitForVisibility(passwordErrorMessage);
         return passwordErrorMessage.getText();
     }
 

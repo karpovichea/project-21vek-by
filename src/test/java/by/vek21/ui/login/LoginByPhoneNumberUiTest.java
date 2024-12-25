@@ -2,7 +2,8 @@ package by.vek21.ui.login;
 
 import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.User;
-import by.vek21.ui.page.LoginPage;
+import by.vek21.ui.page.login.LoginPageMessages;
+import by.vek21.ui.page.login.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
 import org.junit.jupiter.api.Assertions;
@@ -12,18 +13,14 @@ import org.junit.jupiter.api.Test;
 
 public class LoginByPhoneNumberUiTest extends BaseUiTest {
 
-    private static final String UNREGISTERED_PHONE_NUMBER_ERROR_MESSAGE = "Проверьте номер телефона или \n" +
-            "войдите по почте";
-    private static final String INVALID_CODE_NUMBER_ERROR_MESSAGE = "Укажите стандартный код оператора";
-
     private LoginPage loginPage;
     private LoginStep loginStep;
 
     @BeforeEach
     public void setUpLoginTest() {
-        new OpenLoginPageStep(driver).openLoginPage();
-        loginStep = new LoginStep(driver);
-        loginPage = new LoginPage(driver);
+        new OpenLoginPageStep().openLoginPage();
+        loginStep = new LoginStep();
+        loginPage = new LoginPage();
     }
 
     @Test
@@ -36,7 +33,7 @@ public class LoginByPhoneNumberUiTest extends BaseUiTest {
 
         loginStep.fillLoginFormByPhoneNumberAndSubmit(user);
 
-        Assertions.assertEquals(UNREGISTERED_PHONE_NUMBER_ERROR_MESSAGE, loginPage.getPhoneNumberErrorMessage(), "Некорректный текст ошибки");
+        Assertions.assertEquals(LoginPageMessages.UNREGISTERED_PHONE_NUMBER_ERROR_MESSAGE, loginPage.getPhoneNumberErrorMessage(), "Некорректный текст ошибки");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незарегистрированным номером телефона");
     }
@@ -51,7 +48,7 @@ public class LoginByPhoneNumberUiTest extends BaseUiTest {
 
         loginStep.fillLoginFormByPhoneNumberAndSubmit(user);
 
-        Assertions.assertEquals(INVALID_CODE_NUMBER_ERROR_MESSAGE, loginPage.getPhoneNumberErrorMessage(), "Некорректный текст ошибки");
+        Assertions.assertEquals(LoginPageMessages.INVALID_CODE_NUMBER_ERROR_MESSAGE, loginPage.getPhoneNumberErrorMessage(), "Некорректный текст ошибки");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с невалидным кодом оператора");
     }

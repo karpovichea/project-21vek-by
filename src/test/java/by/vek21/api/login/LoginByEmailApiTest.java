@@ -13,10 +13,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginByEmailApiTest extends BaseApiTest {
 
     private static final String EMPTY_VALUE = "";
-    private static final String UNREGISTERED_EMAIL_ERROR_MESSAGE = "Проверьте email";
-    private static final String INVALID_PASSWORD_ERROR_MESSAGE = "Неправильный пароль";
-    private static final String INVALID_EMAIL_ERROR_MESSAGE = "Ошибка валидации поля email";
-    private static final String INVALID_PASSWORD_LENGTH_ERROR_MESSAGE = "Длина поля password должна быть от 6 до 32 символов";
 
     @BeforeEach
     void setUp() {
@@ -36,7 +32,7 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         response
                 .statusCode(200)
-                .body("error", equalTo(UNREGISTERED_EMAIL_ERROR_MESSAGE));
+                .body("error", equalTo(LoginMessages.UNREGISTERED_EMAIL_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация c незарегистрированной электронной почтой");
     }
@@ -54,7 +50,7 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         response
                 .statusCode(200)
-                .body("error", equalTo(INVALID_PASSWORD_ERROR_MESSAGE));
+                .body("error", equalTo(LoginMessages.INVALID_PASSWORD_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с неверным паролем");
     }
@@ -86,7 +82,7 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         response
                 .statusCode(200)
-                .body("error", equalTo(INVALID_EMAIL_ERROR_MESSAGE));
+                .body("error", equalTo(LoginMessages.INVALID_EMAIL_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с недопустимым форматом электронной почты");
     }
@@ -104,7 +100,7 @@ public class LoginByEmailApiTest extends BaseApiTest {
 
         response
                 .statusCode(200)
-                .body("error", equalTo(INVALID_PASSWORD_LENGTH_ERROR_MESSAGE));
+                .body("error", equalTo(LoginMessages.INVALID_PASSWORD_LENGTH_ERROR_MESSAGE));
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с паролем недопустимой длины");
     }

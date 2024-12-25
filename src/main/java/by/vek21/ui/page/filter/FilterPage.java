@@ -1,10 +1,10 @@
-package by.vek21.ui.page;
+package by.vek21.ui.page.filter;
 
+import by.vek21.ui.page.BasePage;
+import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class FilterPage extends BasePage {
@@ -15,13 +15,13 @@ public class FilterPage extends BasePage {
     @FindBy(id = "maxPrice")
     private WebElement priceToField;
 
-    public FilterPage(WebDriver driver) {
-        super(driver);
+    public FilterPage() {
+        super();
     }
 
     @Override
     public FilterPage waitForLoad() {
-        wait.until(ExpectedConditions.elementToBeClickable(priceFromField));
+        Wait.waitForClickable(priceFromField);
         return this;
     }
 

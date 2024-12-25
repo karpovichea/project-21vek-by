@@ -1,10 +1,10 @@
-package by.vek21.ui.page;
+package by.vek21.ui.page.home;
 
+import by.vek21.ui.page.BasePage;
 import by.vek21.ui.util.UserActionUtil;
-import org.openqa.selenium.WebDriver;
+import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -22,13 +22,13 @@ public class HomePage extends BasePage {
     @FindBy(className = "styles_promoItem__aolWq")
     private List<WebElement> promotedCategories;
 
-    public HomePage(WebDriver driver) {
-        super(driver);
+    public HomePage() {
+        super();
     }
 
     @Override
     public HomePage waitForLoad() {
-        wait.until(ExpectedConditions.elementToBeClickable(accountButton));
+        Wait.waitForClickable(accountButton);
         return this;
     }
 

@@ -2,8 +2,8 @@ package by.vek21.ui.filter;
 
 import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.Product;
-import by.vek21.ui.page.ProductPage;
-import by.vek21.ui.page.FilterPage;
+import by.vek21.ui.page.product.ProductPage;
+import by.vek21.ui.page.filter.FilterPage;
 import by.vek21.ui.step.OpenProductPageStep;
 import by.vek21.ui.util.PriceUtil;
 import org.junit.jupiter.api.Assertions;
@@ -20,8 +20,8 @@ public class FilterByPriceUiTest extends BaseUiTest {
 
     @BeforeEach
     public void setUpFilterTest() {
-        new OpenProductPageStep(driver).openProductPageByPopularCategory();
-        filterPage = new FilterPage(driver);
+        new OpenProductPageStep().openProductPageByPopularCategory();
+        filterPage = new FilterPage();
     }
 
     @Test
@@ -34,7 +34,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
                 .waitForLoad()
                 .setPriceFrom(String.valueOf(minValue));
 
-        productPage = new ProductPage(driver);
+        productPage = new ProductPage();
         productPage.waitForLoadAfterFilter();
 
         List<Product> actualProducts = productPage.getAllProducts();
@@ -55,7 +55,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
                 .waitForLoad()
                 .setPriceTo(String.valueOf(maxValue));
 
-        productPage = new ProductPage(driver);
+        productPage = new ProductPage();
         productPage.waitForLoadAfterFilter();
 
         List<Product> actualProducts = productPage.getAllProducts();
@@ -78,7 +78,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
                 .setPriceFrom(String.valueOf(minValue))
                 .setPriceTo(String.valueOf(maxValue));
 
-        productPage = new ProductPage(driver);
+        productPage = new ProductPage();
         productPage.waitForLoadAfterFilter();
 
         List<Product> actualProducts = productPage.getAllProducts();

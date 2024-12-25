@@ -2,7 +2,8 @@ package by.vek21.ui.login;
 
 import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.User;
-import by.vek21.ui.page.LoginPage;
+import by.vek21.ui.page.login.LoginPageMessages;
+import by.vek21.ui.page.login.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
 import by.vek21.ui.util.GenerateDataUtil;
@@ -14,19 +15,15 @@ import org.junit.jupiter.api.Test;
 public class LoginByEmailUiTest extends BaseUiTest {
 
     private static final String EMPTY_VALUE = "";
-    private static final String EMPTY_EMAIL_ERROR_MESSAGE = "Электронная почта не указана";
-    private static final String EMPTY_PASSWORD_ERROR_MESSAGE = "Пароль не указан";
-    private static final String UNREGISTERED_EMAIL_ERROR_MESSAGE = "Проверьте электронную почту или \nзарегистрируйтесь";
-    private static final String INVALID_PASSWORD_ERROR_MESSAGE = "Неправильный пароль. \nСбросить пароль?";
 
     private LoginPage loginPage;
     private LoginStep loginStep;
 
     @BeforeEach
     public void setUpLoginTest() {
-        new OpenLoginPageStep(driver).openLoginPage();
-        loginStep = new LoginStep(driver);
-        loginPage = new LoginPage(driver);
+        new OpenLoginPageStep().openLoginPage();
+        loginStep = new LoginStep();
+        loginPage = new LoginPage();
     }
 
     @Test
@@ -40,7 +37,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
-        Assertions.assertEquals(UNREGISTERED_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
+        Assertions.assertEquals(LoginPageMessages.UNREGISTERED_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация c незарегистрированной электронной почтой");
     }
@@ -56,7 +53,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
-        Assertions.assertEquals(INVALID_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
+        Assertions.assertEquals(LoginPageMessages.INVALID_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с неверным паролем");
     }
@@ -71,7 +68,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
-        Assertions.assertEquals(EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
+        Assertions.assertEquals(LoginPageMessages.EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненной электронной почтой");
     }
@@ -86,7 +83,7 @@ public class LoginByEmailUiTest extends BaseUiTest {
 
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
-        Assertions.assertEquals(EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
+        Assertions.assertEquals(LoginPageMessages.EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненным паролем");
     }
@@ -101,8 +98,8 @@ public class LoginByEmailUiTest extends BaseUiTest {
         loginStep.fillLoginFormByEmailAndSubmit(user);
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки"),
-                () -> Assertions.assertEquals(EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки")
+                () -> Assertions.assertEquals(LoginPageMessages.EMPTY_EMAIL_ERROR_MESSAGE, loginPage.getEmailErrorMessage(), "Некорректный текст ошибки"),
+                () -> Assertions.assertEquals(LoginPageMessages.EMPTY_PASSWORD_ERROR_MESSAGE, loginPage.getPasswordErrorMessage(), "Некорректный текст ошибки")
         );
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Авторизация с незаполненными полями");

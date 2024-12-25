@@ -2,7 +2,7 @@ package by.vek21.ui.cart;
 
 import by.vek21.ui.BaseUiTest;
 import by.vek21.domain.Product;
-import by.vek21.ui.page.CartPage;
+import by.vek21.ui.page.cart.CartPage;
 import by.vek21.ui.step.AddProductToCartStep;
 import by.vek21.ui.step.OpenProductPageStep;
 import by.vek21.ui.util.PriceUtil;
@@ -19,7 +19,7 @@ public class AddProductToCartUiTest extends BaseUiTest {
 
     @BeforeEach
     public void setUpOrderProductTest() {
-        new OpenProductPageStep(driver).openProductPageByPopularCategory();
+        new OpenProductPageStep().openProductPageByPopularCategory();
     }
 
     @Test
@@ -31,7 +31,7 @@ public class AddProductToCartUiTest extends BaseUiTest {
                 new Product("Диван угловой Mio Tesoro Атланта 110 (Savana Chocolate/Ecostile Chocolate)", "1 235,00 р.")
         );
 
-        addProductToCartStep = new AddProductToCartStep(driver);
+        addProductToCartStep = new AddProductToCartStep();
         addProductToCartStep.addProductsToCart(expectedProducts);
 
         List<Product> actualProducts = addProductToCartStep.getProductsFromCart();
@@ -53,11 +53,11 @@ public class AddProductToCartUiTest extends BaseUiTest {
 
         Double expectedSum = PriceUtil.calculateTotalPrice(expectedProducts);
 
-        addProductToCartStep = new AddProductToCartStep(driver);
+        addProductToCartStep = new AddProductToCartStep();
         addProductToCartStep.addProductsToCart(expectedProducts);
 
         List<Product> actualProducts = addProductToCartStep.getProductsFromCart();
-        Double actualSum = PriceUtil.parsePrice(new CartPage(driver).getTotalPrice());
+        Double actualSum = PriceUtil.parsePrice(new CartPage().getTotalPrice());
 
         Assertions.assertAll(
                 () -> Assertions.assertTrue(actualProducts.containsAll(expectedProducts), "Товары в корзине отличаются"),

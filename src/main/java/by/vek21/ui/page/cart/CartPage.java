@@ -1,11 +1,11 @@
-package by.vek21.ui.page;
+package by.vek21.ui.page.cart;
 
 import by.vek21.domain.Product;
+import by.vek21.ui.page.BasePage;
+import by.vek21.ui.wait.Wait;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,13 +21,13 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//div[@data-testid='total-price']")
     private WebElement totalPrice;
 
-    public CartPage(WebDriver driver) {
-        super(driver);
+    public CartPage() {
+        super();
     }
 
     @Override
     public CartPage waitForLoad() {
-        wait.until(ExpectedConditions.visibilityOf(totalPrice));
+        Wait.waitForVisibility(totalPrice);
         return this;
     }
 
