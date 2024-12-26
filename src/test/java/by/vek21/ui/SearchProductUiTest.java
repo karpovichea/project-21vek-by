@@ -2,6 +2,8 @@ package by.vek21.ui;
 
 import by.vek21.ui.page.search.SearchPageMessages;
 import by.vek21.ui.page.search.SearchPage;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+@Epic("UI тесты")
+@Feature("Поиск товаров")
 public class SearchProductUiTest extends BaseUiTest {
 
     private SearchPage searchPage;

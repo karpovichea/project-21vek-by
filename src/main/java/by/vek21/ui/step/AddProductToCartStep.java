@@ -4,6 +4,7 @@ import by.vek21.domain.Product;
 import by.vek21.ui.page.cart.CartPage;
 import by.vek21.ui.page.home.HomePage;
 import by.vek21.ui.page.product.ProductPage;
+import io.qameta.allure.Step;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class AddProductToCartStep {
         cartPage = new CartPage();
     }
 
+    @Step("Добавить товар в корзину")
     public void addProductsToCart(List<Product> products) {
         productPage.waitForLoad();
         products.forEach(product -> productPage.addProductToCartByName(product.getName()));

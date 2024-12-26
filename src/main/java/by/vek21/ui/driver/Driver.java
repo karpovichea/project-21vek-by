@@ -17,7 +17,6 @@ public class Driver {
         if (driver == null) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-//            options.addArguments("--disable-notifications");
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         }

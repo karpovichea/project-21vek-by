@@ -2,6 +2,7 @@ package by.vek21.ui.step;
 
 import by.vek21.domain.User;
 import by.vek21.ui.page.login.LoginPage;
+import io.qameta.allure.Step;
 
 public class LoginStep {
 
@@ -11,6 +12,7 @@ public class LoginStep {
         loginPage = new LoginPage();
     }
 
+    @Step("Заполнить емейл и пароль и нажать на кнопку 'Подтвердить'")
     public void fillLoginFormByEmailAndSubmit(User user) {
         loginPage
                 .waitForLoad()
@@ -19,6 +21,7 @@ public class LoginStep {
                 .clickContinueByEmailButton();
     }
 
+    @Step("Заполнить номер телефона и нажать на кнопку 'Подтвердить'")
     public void fillLoginFormByPhoneNumberAndSubmit(User user) {
         loginPage
                 .waitForLoad()

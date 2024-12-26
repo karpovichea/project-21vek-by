@@ -5,6 +5,8 @@ import by.vek21.ui.page.product.ProductPage;
 import by.vek21.ui.page.filter.FilterPage;
 import by.vek21.ui.step.OpenProductPageStep;
 import by.vek21.ui.util.PriceUtil;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+@Epic("UI тесты")
+@Feature("Фильтрация товаров по цене")
 public class FilterByPriceUiTest extends BaseUiTest {
 
     private FilterPage filterPage;
@@ -24,7 +28,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
     }
 
     @Test
-    @DisplayName("Фильтр товаров по заданной наименьшей цене")
+    @DisplayName("Фильтрация товаров по заданной наименьшей цене")
     public void testFilterItemsByLowestPrice() {
         logger.info("ЗАПУСК ТЕСТА: Фильтр товаров по заданной наименьшей цене");
 
@@ -44,7 +48,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
     }
 
     @Test
-    @DisplayName("Фильтр товаров по заданной наибольшей цене")
+    @DisplayName("Фильтрация товаров по заданной наибольшей цене")
     public void testFilterItemsByHighestPrice() {
         logger.info("ЗАПУСК ТЕСТА: Фильтр товаров по заданной наибольшей цене");
 
@@ -65,7 +69,7 @@ public class FilterByPriceUiTest extends BaseUiTest {
     }
 
     @Test
-    @DisplayName("Фильтр товаров по заданному диапазону цен")
+    @DisplayName("Фильтрация товаров по заданному диапазону цен")
     public void testFilterItemsBetweenPrices() {
         logger.info("ЗАПУСК ТЕСТА: Фильтр товаров по заданному диапазону цен");
 
@@ -82,7 +86,8 @@ public class FilterByPriceUiTest extends BaseUiTest {
 
         List<Product> actualProducts = productPage.getAllProducts();
 
-        Assertions.assertTrue(PriceUtil.isPricesInRange(actualProducts, minValue, maxValue), "Есть товары выходящие за указанный диапазон цен");
+        Assertions.assertTrue(PriceUtil.isPricesInRange(actualProducts, minValue, maxValue),
+                "Есть товары выходящие за указанный диапазон цен");
 
         logger.info("ЗАВЕРШЕНИЕ ТЕСТА: Фильтр товаров по заданному диапазону цен");
     }

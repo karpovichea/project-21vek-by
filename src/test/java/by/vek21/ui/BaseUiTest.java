@@ -15,13 +15,7 @@ public class BaseUiTest {
     @BeforeEach
     public void setUp() {
         Driver.getDriver().get(BASE_URL);
-
         Driver.setLocalStorageItem();
-
-//        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-//        js.executeScript(
-//                "localStorage.setItem('partner-cookies', JSON.stringify({\"value\":{\"isAnalyticsCookies\":true,\"isFunctionalCookies\":true},\"expireIn\":null}));"
-//        );
         Driver.getDriver().navigate().refresh();
     }
 

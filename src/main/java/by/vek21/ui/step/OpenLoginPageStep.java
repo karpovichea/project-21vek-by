@@ -1,7 +1,7 @@
 package by.vek21.ui.step;
 
 import by.vek21.ui.page.home.HomePage;
-import org.openqa.selenium.WebDriver;
+import io.qameta.allure.Step;
 
 public class OpenLoginPageStep {
 
@@ -11,6 +11,7 @@ public class OpenLoginPageStep {
         homePage = new HomePage();
     }
 
+    @Step("Перейти на страницу логина")
     public void openLoginPage() {
         homePage
                 .waitForLoad()

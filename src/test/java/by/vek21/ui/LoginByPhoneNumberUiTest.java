@@ -6,11 +6,15 @@ import by.vek21.ui.page.login.LoginPage;
 import by.vek21.ui.step.LoginStep;
 import by.vek21.ui.step.OpenLoginPageStep;
 import by.vek21.util.GenerateUsers;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@Epic("UI тесты")
+@Feature("Авторизация с помощью номера телефона")
 public class LoginByPhoneNumberUiTest extends BaseUiTest {
 
     private LoginPage loginPage;

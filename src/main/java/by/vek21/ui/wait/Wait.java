@@ -33,6 +33,6 @@ public class Wait {
     }
 
     public static void waitForStalenessOfLastElement(List<WebElement> elements) {
-            getWait().until(ExpectedConditions.stalenessOf(elements.getLast()));
-        }
+        getWait().until(ExpectedConditions.stalenessOf(elements.getLast()));
+    }
 }

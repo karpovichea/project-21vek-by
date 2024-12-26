@@ -5,6 +5,8 @@ import by.vek21.api.login.response.LoginResponse;
 import by.vek21.api.login.response.LoginResponseMessages;
 import by.vek21.domain.User;
 import by.vek21.util.GenerateUsers;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic("API тесты")
+@Feature("Авторизация с помощью номера телефона")
 public class LoginByPhoneNumberApiTest extends BaseApiTest {
 
     @BeforeEach

@@ -3,6 +3,7 @@ package by.vek21.ui.page.search;
 import by.vek21.ui.page.BasePage;
 import by.vek21.ui.util.ElementUtil;
 import by.vek21.ui.wait.Wait;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,6 +41,7 @@ public class SearchPage extends BasePage {
         return this;
     }
 
+    @Step("Ввести поисковой запрос")
     public SearchPage enterSearchQuery(String query) {
         searchField.sendKeys(query);
         searchField.click();
@@ -48,11 +50,13 @@ public class SearchPage extends BasePage {
         return this;
     }
 
+    @Step("Очистить строку поиска")
     public SearchPage clearSearch() {
         clearButton.click();
         return this;
     }
 
+    @Step("Нажать на строку поиска")
     public void clickSearchField() {
         searchField.click();
     }
@@ -62,6 +66,7 @@ public class SearchPage extends BasePage {
     }
 
     public List<String> getRecentQueries() {
+        Wait.waitForAllElementsVisibility(recentQueries);
         return ElementUtil.getTextsFromElements(recentQueries);
     }
 
