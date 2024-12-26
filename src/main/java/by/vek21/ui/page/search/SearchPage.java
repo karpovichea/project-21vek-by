@@ -52,6 +52,7 @@ public class SearchPage extends BasePage {
 
     @Step("Очистить строку поиска")
     public SearchPage clearSearch() {
+        Wait.waitForVisibility(clearButton);
         clearButton.click();
         return this;
     }
